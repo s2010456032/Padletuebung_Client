@@ -1,0 +1,82 @@
+<div class="ui container">
+<h1>Eintrags-Ansicht</h1>
+<form class="ui large form" [formGroup]="entryForm"
+      (ngSubmit)="submitForm()">
+  <input type="hidden" formControlName="id">
+  <div class="field item_text">
+    <ng-container *ngIf="authService.isLoggedIn(); else showText">
+      <input formControlName="text">
+    </ng-container>
+    <ng-template #showText>
+      <p>{{entry.text}}</p>
+    </ng-template>
+
+    <div *ngIf="errors['text']" class="ui negative message"> {{ errors['text'] }} </div>
+  </div>
+
+  <br>
+
+  <div class="rating-container">
+    <div *ngFor="let rating of entry.ratings" class="rating-box">
+      <div class="star-box">
+        <ng-container *ngIf="rating.rating !== undefined">
+          <ng-container *ngFor="let star of getStarsArray(rating.rating)">
+            <i class="star icon"></i>
+          </ng-container>
+        </ng-container>
+      </div>
+      <br>
+      <strong>{{rating.comment}}</strong>
+      <div><span style="font-size: smaller">Kommentar von User: </span>{{rating.username}}</div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Kommi Feld nur anzeigen wenn eingeloggt -->
+  <div *ngIf="authService.isLoggedIn()" class="field">
+    <br>
+    <label>Sternebewertung oder Kommentar hinzufügen</label>
+    <div>
+      <!-- für alle Ratings dies schon gibt - ausgeben lassen -->
+        <div class="two wide field">
+          <input formControlName="rating" type="number" step="1" min="0" max="5">
+        </div>
+        <div class="six wide field">
+          <input formControlName="comment" placeholder="Kommentartext">
+        </div>
+      </div>
+    <div *ngIf="errors['ratings']" class="ui negative message">{{errors['ratings']}}</div>
+  </div>
+
+
+<br>
+
+
+
+  <ng-container *ngIf="authService.isLoggedIn(); else showBackButton">
+    <!-- Zurück Button
+    <a class="ui tiny labeled button"
+       [routerLink]="['../../padlets', entry.padlet_id]">
+      Zurück zum Padelet
+    </a> -->
+    <button type="submit" class="ui tiny button bluebutton"
+            [disabled]="entryForm.invalid">Speichern</button>
+  </ng-container>
+  <ng-template #showBackButton>
+    <a class="ui tiny button bluebutton"
+       [routerLink]="['../../padlets', entry.padlet_id]">
+      Zurück zum Padelet
+    </a>
+  </ng-template>
+
+  <ng-container *ngIf="authService.isLoggedIn()">
+    <button *ngIf="entry.id !== 0" class="ui tiny red labeled icon button"
+            (click)="removeEntry()">
+      <i class="remove icon"></i> Entry löschen
+    </button>
+  </ng-container>
+
+  <br><br>
+
+</form>
+</div>

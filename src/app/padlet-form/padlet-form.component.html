@@ -1,0 +1,33 @@
+<div class="ui container">
+<h1>Padlet bearbeiten</h1>
+<form class="ui large form" [formGroup]="padletForm"
+      (ngSubmit)="submitForm()">
+  <input type="hidden" formControlName="id">
+  <div class="field">
+    <label>Titel des Padlets</label>
+    <input formControlName="name">
+    <div *ngIf="errors['name']" class="ui negative message"> {{
+      errors['name'] }} </div>
+  </div>
+
+  <div class="field">
+    <br>
+    <label *ngIf="authService.isLoggedIn()">Öffentlich schalten?</label>
+
+    <div>
+    <input type="radio" id="radio_is_public" name="is_public" [checked]="padlet.is_public === 1 ? true: false" (click)="clickRadio(1)">
+    <label for="radio_is_public">öffentlich</label>
+    </div>
+    <div>
+    <input *ngIf="authService.isLoggedIn()" type="radio" id="radio_is_not_public" name="is_public" [checked]="padlet.is_public === 0 ? true: false" (click)="clickRadio(0)">
+    <label *ngIf="authService.isLoggedIn()" for="radio_is_not_public">privat</label><br>
+    </div>
+  </div>
+
+
+
+  <button type="submit" class="ui tiny button bluebutton"
+          [disabled]="padletForm.invalid">Speichern</button>
+
+</form>
+</div>

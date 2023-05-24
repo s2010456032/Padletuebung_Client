@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Abstand oben*/
+.ui.container{
+  margin-top: 60px !important;
+}
+
+/* Anordnung Ratings */
+.rating-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rating-box {
+  flex: 0 0 calc(25% - 20px);
+  background-color: #e8f4f8; /*ligehtblue*/
+  padding: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+/* Stars */
+i.icon.star:before{
+  color: #72bcd4;
+}
+
+/* Menü */
+a.item:hover {
+  background-color: rgb(232,244,248) !important;
+}
+a.item:hover span{
+  transform: scale(1.2);
+  transition: transform 200ms ease-in-out;
+}
+
+/* Buttons*/
+.bluebutton {
+  color: black !important;
+  background-color: #72bcd4 !important;
+}
+.bluebutton:hover {
+  color: white !important;
+  background-color: #41879f !important;
+}
+
+/* Padlet Übersicht */
+.padlet_item{
+  color: #72bcd4;
+}
+.padlet_item strong{
+  color: black;
+  font-size: larger;
+}
+.flex-anordnung{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px !important;
+}
+
+
+/* Entry Übersicht */
+.item_text{
+  font-size: larger;
+  font-weight: bold;
+}
+

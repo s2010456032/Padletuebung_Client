@@ -1,0 +1,5 @@
+<div class="padlet_item">
+  <strong>{{ padlet?.name }}</strong>
+  <div *ngIf="padlet?.is_public === 1">öffentlich</div>
+  <div *ngIf="padlet?.is_public === 0">privat</div>
+</div>
